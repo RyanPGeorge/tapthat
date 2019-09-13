@@ -19,6 +19,7 @@
                     <li><a href="/" class="left brand-logo">&nbsp;&nbsp;TapThat</a></li>
                 </ul>
                 <ul class="right">
+
                     {% if user.is_authenticated %}
                       <li><a href="{% url 'cooler' %}">My Cooler</a></li>
                       <li><a href="">Discover</a></li>
@@ -28,10 +29,24 @@
                     <li><a href="{% url 'signup' %}">Sign Up</a></li>
                     <li><a href="{% url 'login' %}">Log In</a></li>
                    {% endif %}
+
                   </ul>
             </div>
         </nav>
     </header>
+    {% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'success'%}
+            <script>M.toast({html: "{{message}}", classes: 'blue rounded', displayLength:2000});</script>
+        {% elif message.tags == 'info'%}
+            <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+        {% elif message.tags == 'warning'%}
+            <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
+        {% elif message.tags == 'error'%}
+            <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+        {% endif %}
+    {% endfor %}
+    {% endif %}
     <main class="container">
         {% block content %}
         {% endblock %}
