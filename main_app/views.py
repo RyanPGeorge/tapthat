@@ -24,6 +24,13 @@ def cooler(request):
 def discover(request):
     return render(request, 'discover.html')
 
+def beers_detail(request, beer_id):
+    beer = Beer.objects.get(id=beer_id)
+    return render(request, 'beers/detail.html',
+    {
+        'beer': beer,
+    })
+
 def signup(request):
   if request.method == 'POST':
     form = SignUpForm(request.POST)
