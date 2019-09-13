@@ -8,14 +8,14 @@ from .forms import SignUpForm
 from .models import Beer
 
 # Create your views here.
-def home(request):
-    return render(request, 'home.html')
+def landing(request):
+    return render(request, 'landing.html')
 
 def about(request):
     return render(request, 'about.html')
 
-def landing(request):
-    return render(request, 'landing.html')
+def home(request):
+    return render(request, 'home.html')
 
 def cooler(request):
     beers = Beer.objects.filter(user=request.user)
@@ -33,7 +33,7 @@ def signup(request):
       messages.success(request, f'New Account Created: {username}')
       login(request, user)
       messages.info(request, f'You are now logged in as {username}')
-      return redirect('landing')
+      return redirect('home')
     else:
       for msg in form.error_messages:
         messages.error(request, f'{msg}: {form.error_messages[msg]}')
@@ -44,7 +44,7 @@ def signup(request):
 def logout_request(request):
   logout(request)
   messages.info(request, 'Logged out successfuly!')
-  return redirect('home')
+  return redirect('landing')
 
 def login_request(request):
   if request.method == 'POST':
@@ -56,7 +56,7 @@ def login_request(request):
       if user is not None:
         login(request, user)
         messages.info(request, f'Your are now logged in as {username}')
-        return redirect('landing')
+        return redirect('home')
       else:
         messages.error(request, 'Invalid username or password')
     else:
