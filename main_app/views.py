@@ -3,17 +3,38 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from .forms import SignUpForm
+from .models import Beer
 
 # Create your views here.
-def home(request):
-    return render(request, 'home.html')
+def landing(request):
+    return render(request, 'landing.html')
 
 def about(request):
     return render(request, 'about.html')
 
-def landing(request):
-    return render(request, 'landing.html')
+@login_required
+def home(request):
+    return render(request, 'home.html')
+
+@login_required
+def cooler(request):
+    beers = Beer.objects.filter(user=request.user)
+    return render(request, 'cooler.html', { 'beers': beers})
+
+
+def discover(request):
+    beers = Beer.objects.all()
+    return render(request, 'discover.html', { 'beers': beers})
+
+def beers_detail(request, beer_id):
+    beer = Beer.objects.get(id=beer_id)
+    return render(request, 'beers/detail.html',
+    {
+        'beer': beer,
+    })
 
 def signup(request):
   if request.method == 'POST':
@@ -24,7 +45,7 @@ def signup(request):
       messages.success(request, f'New Account Created: {username}')
       login(request, user)
       messages.info(request, f'You are now logged in as {username}')
-      return redirect('landing')
+      return redirect('home')
     else:
       for msg in form.error_messages:
         messages.error(request, f'{msg}: {form.error_messages[msg]}')
@@ -35,7 +56,7 @@ def signup(request):
 def logout_request(request):
   logout(request)
   messages.info(request, 'Logged out successfuly!')
-  return redirect('home')
+  return redirect('landing')
 
 def login_request(request):
   if request.method == 'POST':
@@ -47,7 +68,7 @@ def login_request(request):
       if user is not None:
         login(request, user)
         messages.info(request, f'Your are now logged in as {username}')
-        return redirect('landing')
+        return redirect('home')
       else:
         messages.error(request, 'Invalid username or password')
     else:

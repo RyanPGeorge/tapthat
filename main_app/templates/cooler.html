@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>My Cooler</h1>
+
+{% for beer in beers %}
+<a href="{% url 'detail' beer.id %}">{{beer.name}}</a>
+{% endfor %}
+
+{% endblock %}
