@@ -6,7 +6,7 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-    return HttpResponse('Hello')
+    return render(request, 'home.html')
 
 def signup(request):
   if request.method == 'POST':
@@ -20,9 +20,9 @@ def signup(request):
       return redirect('landing')
     else:
       for msg in form.error_messages:
-        messages.error(request, f'{msg}: {form.error_mesages[msg]}')
+        messages.error(request, f'{msg}: {form.error_messages[msg]}')
   
-  form = NewUserForm()
+  form = UserCreationForm()
   return render(request,'registration/signup.html', {'form':form})
 
 def logout_request(request):
