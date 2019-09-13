@@ -5,6 +5,8 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import SignUpForm
 
+from .models import Beer
+
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -14,6 +16,13 @@ def about(request):
 
 def landing(request):
     return render(request, 'landing.html')
+
+def cooler(request):
+    beers = Beer.objects.filter(user=request.user)
+    return render(request, 'cooler.html', { 'beers': beers})
+
+def discover(request):
+    return render(request, 'discover.html')
 
 def signup(request):
   if request.method == 'POST':
