@@ -19,6 +19,7 @@
                     <li><a href="/" class="left brand-logo">&nbsp;&nbsp;TapThat</a></li>
                 </ul>
                 <ul class="right">
+
                     {% if user.is_authenticated %}
                       <li><a href="">My Cooler</a></li>
                       <li><a href="">Discover</a></li>
@@ -28,6 +29,7 @@
                     <li><a href="{% url 'signup' %}">Sign Up</a></li>
                     <li><a href="{% url 'login' %}">Log In</a></li>
                    {% endif %}
+
                   </ul>
             </div>
         </nav>
