@@ -3,8 +3,9 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .forms import SignUpForm
+from django.contrib.auth.decorators import login_required
 
+from .forms import SignUpForm
 from .models import Beer
 
 # Create your views here.
@@ -14,12 +15,15 @@ def landing(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def home(request):
     return render(request, 'home.html')
 
+@login_required
 def cooler(request):
     beers = Beer.objects.filter(user=request.user)
     return render(request, 'cooler.html', { 'beers': beers})
+
 
 def discover(request):
     beers = Beer.objects.all()
