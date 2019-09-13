@@ -6,7 +6,7 @@ from django.contrib import messages
 
 # Create your views here.
 def home(request):
-    return HttpResponse('Hello')
+    return render(request, 'home.html')
 
 def signup(request):
   if request.method == 'POST':
