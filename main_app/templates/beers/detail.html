@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Details</h1>
+
+<p>{{beer.name}}</p>
+<p>{{beer.brewer}}</p>
+<p>{{beer.abv}}</p>
+<p>{{beer.ibu}}</p>
+<p>{{beer.style}}</p>
+<p>{{beer.taste_profile}}</p>
+<p>{{beer.get_container_type_display}}</p>
+
+{% endblock %}
