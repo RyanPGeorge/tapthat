@@ -32,7 +32,7 @@ The Problem We Solve:
 How Does It Work?
 -----
   
-* Public Users may log-in to browse the app to search for their favorite beers or discover new beers
+* Public Users may log-in to browse the app to search for their favorite beers or discover new beers.
   
 * Users can save their favorite beers to their user profile, to keep track of where there favorite brew is on tap.
 
