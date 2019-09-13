@@ -22,8 +22,10 @@ class Beer(models.Model):
     container_type = models.CharField(
         max_length = 1,
         choices = CONTAINERS,
-        default = CONTAINERS [0][0]
+        default = CONTAINERS[0][0]
     )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.name
     
