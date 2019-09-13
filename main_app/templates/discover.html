@@ -4,7 +4,9 @@
 <h1>Discover Page</h1>
 
 {% for beer in beers %}
-<a href="{% url 'detail' beer.id %}">{{beer.name}}</a>
+    <p>
+        <a href="{% url 'detail' beer.id %}">{{beer.name}}</a>
+    </p>
 {% endfor %}
 
 {% endblock %}
