@@ -5,24 +5,15 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import SignUpForm
 
-from .models import Beer
-
 # Create your views here.
-def landing(request):
-    return render(request, 'landing.html')
+def home(request):
+    return render(request, 'home.html')
 
 def about(request):
     return render(request, 'about.html')
 
-def home(request):
-    return render(request, 'home.html')
-
-def cooler(request):
-    beers = Beer.objects.filter(user=request.user)
-    return render(request, 'cooler.html', { 'beers': beers})
-
-def discover(request):
-    return render(request, 'discover.html')
+def landing(request):
+    return render(request, 'landing.html')
 
 def signup(request):
   if request.method == 'POST':
@@ -33,7 +24,7 @@ def signup(request):
       messages.success(request, f'New Account Created: {username}')
       login(request, user)
       messages.info(request, f'You are now logged in as {username}')
-      return redirect('home')
+      return redirect('landing')
     else:
       for msg in form.error_messages:
         messages.error(request, f'{msg}: {form.error_messages[msg]}')
@@ -44,7 +35,7 @@ def signup(request):
 def logout_request(request):
   logout(request)
   messages.info(request, 'Logged out successfuly!')
-  return redirect('landing')
+  return redirect('home')
 
 def login_request(request):
   if request.method == 'POST':
@@ -56,7 +47,7 @@ def login_request(request):
       if user is not None:
         login(request, user)
         messages.info(request, f'Your are now logged in as {username}')
-        return redirect('home')
+        return redirect('landing')
       else:
         messages.error(request, 'Invalid username or password')
     else:
