@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+from .forms import SignUpForm
 
 # Create your views here.
 def home(request):
@@ -16,7 +17,7 @@ def landing(request):
 
 def signup(request):
   if request.method == 'POST':
-    form = UserCreationForm(request.POST)
+    form = SignUpForm(request.POST)
     if form.is_valid():
       user = form.save()
       username = form.cleaned_data.get('username')
@@ -28,7 +29,7 @@ def signup(request):
       for msg in form.error_messages:
         messages.error(request, f'{msg}: {form.error_messages[msg]}')
   
-  form = UserCreationForm()
+  form = SignUpForm()
   return render(request,'registration/signup.html', {'form':form})
 
 def logout_request(request):
