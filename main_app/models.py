@@ -14,4 +14,3 @@ from django.contrib.auth.models import User
 #     taste_profile = 
 #     container_type = 
 #     restaurant = 
-
