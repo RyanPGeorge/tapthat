@@ -22,7 +22,8 @@ def cooler(request):
     return render(request, 'cooler.html', { 'beers': beers})
 
 def discover(request):
-    return render(request, 'discover.html')
+    beers = Beer.objects.all()
+    return render(request, 'discover.html', { 'beers': beers})
 
 def beers_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
