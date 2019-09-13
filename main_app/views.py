@@ -8,6 +8,12 @@ from django.contrib import messages
 def home(request):
     return render(request, 'home.html')
 
+def about(request):
+    return render(request, 'about.html')
+
+def landing(request):
+    return render(request, 'landing.html')
+
 def signup(request):
   if request.method == 'POST':
     form = UserCreationForm(request.POST)
@@ -20,9 +26,9 @@ def signup(request):
       return redirect('landing')
     else:
       for msg in form.error_messages:
-        messages.error(request, f'{msg}: {form.error_mesages[msg]}')
+        messages.error(request, f'{msg}: {form.error_messages[msg]}')
   
-  form = NewUserForm()
+  form = UserCreationForm()
   return render(request,'registration/signup.html', {'form':form})
 
 def logout_request(request):
