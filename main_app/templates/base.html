@@ -22,7 +22,7 @@
                 <ul class="right">
                         <li><a href="{% url 'about' %}"><i class="material-icons left">info_outline</i>About</a></li>
                     {% if user.is_authenticated %}
-                      <li><a href="{% url 'cooler' %}"><i class="material-icons left">ac_unit</i>My Cooler</a></li>
+                      <li><a href="{% url 'cooler' %}"><i class="material-icons left">ac_unit</i>{{user.first_name|capfirst}}'s Cooler</a></li>
                       <li><a href="{% url 'discover' %}"><i class="material-icons left">search</i>Discover</a></li>
                       <li><a href="{% url 'logout' %}"><i class="material-icons left">lock_outline</i>Log Out</a></li>
                     {% else %}
