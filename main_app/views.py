@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .forms import SignUpForm
-from .models import Beer
+from .models import Beer, LikeBeerUser
 
 # Create your views here.
 def landing(request):
@@ -21,8 +21,8 @@ def home(request):
 
 @login_required
 def cooler(request):
-    beers = Beer.objects.filter(user=request.user)
-    return render(request, 'cooler.html', { 'beers': beers})
+    my_beers = LikeBeerUser.objects.filter(user=request.user)
+    return render(request, 'cooler.html', { 'my_beers': my_beers})
 
 
 def discover(request):
