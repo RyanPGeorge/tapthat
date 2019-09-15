@@ -25,6 +25,13 @@ def cooler(request):
     my_beers = LikeBeerUser.objects.filter(user=request.user)
     return render(request, 'cooler.html', { 'my_beers': my_beers})
 
+def cooler_add(request, beer_id, user_id):
+  beer = Beer.objects.get(id=beer_id)
+  user = User.objects.get(id=user_id)
+  add = LikeBeerUser(beer=beer, user=user)
+  add.save()
+  messages.success(request, f'Successfully added {beer.name} to Cooler')
+  return redirect('discover')
 
 def discover(request):
     beers = Beer.objects.all()
