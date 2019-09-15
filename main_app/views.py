@@ -22,12 +22,8 @@ def home(request):
 
 @login_required
 def cooler(request):
-    beers = Beer.objects.all()
     my_beers = LikeBeerUser.objects.filter(user = request.user)
-    return render(request, 'cooler.html', { 
-      'my_beers': my_beers,
-      'beers': beers
-    })
+    return render(request, 'cooler.html', {'my_beers': my_beers})
 
 def cooler_add(request, beer_id, user_id):
   beer = Beer.objects.get(id=beer_id)
