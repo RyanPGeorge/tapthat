@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from .forms import SignUpForm
 from .models import Beer, LikeBeerUser
@@ -28,6 +29,13 @@ def cooler(request):
       'beers': beers
     })
 
+def cooler_add(request, beer_id, user_id):
+  beer = Beer.objects.get(id=beer_id)
+  user = User.objects.get(id=user_id)
+  add = LikeBeerUser(beer=beer, user=user)
+  add.save()
+  messages.success(request, f'Successfully added {beer.name} to Cooler')
+  return redirect('discover')
 
 def discover(request):
     beers = Beer.objects.all()
