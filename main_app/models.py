@@ -14,6 +14,7 @@ CONTAINERS = (
 )
 
 
+
 class Beer(models.Model):
     name = models.CharField(max_length=100)
     brewer = models.CharField(max_length=100)
@@ -26,7 +27,12 @@ class Beer(models.Model):
         choices = CONTAINERS,
         default = CONTAINERS[0][0]
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.name
+
+class LikeBeerUser(models.Model):
+    beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
