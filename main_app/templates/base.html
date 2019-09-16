@@ -14,7 +14,7 @@
 </head>
 <body>
     <header class="navbar-fixed">
-        <nav>
+        <nav class="nav-extended">
             <div class="nav-wrapper brown">
                 <ul>
                     <li><a href="/" class="left brand-logo">&nbsp;&nbsp;TapThat</a></li>
@@ -22,16 +22,23 @@
                 <ul class="right">
                         <li><a href="{% url 'about' %}"><i class="material-icons left">info_outline</i>About</a></li>
                     {% if user.is_authenticated %}
-                      <li><a href="{% url 'cooler' %}"><i class="material-icons left">ac_unit</i>{{user.first_name|capfirst}}'s Cooler</a></li>
                       <li><a href="{% url 'discover' %}"><i class="material-icons left">search</i>Discover</a></li>
                       <li><a href="{% url 'logout' %}"><i class="material-icons left">lock_outline</i>Log Out</a></li>
                     {% else %}
                     <li><a href="{% url 'signup' %}"><i class="material-icons left">add</i>Sign Up</a></li>
                     <li><a href="{% url 'login' %}"><i class="material-icons left">lock_open</i>Log In</a></li>
                    {% endif %}
-
                   </ul>
             </div>
+            {% if user.is_authenticated %}
+            <div class="nav-content">
+                <ul class="tabs tabs-transparent brown darken-2">
+                    <li class="tab"><a href="{% url 'home' %}"><i class="material-icons left">home</i>{{user.first_name|capfirst}}'s home</a></li>
+                    <li class="tab"><a href="{% url 'cooler' %}"><i class="material-icons left">ac_unit</i>{{user.first_name|capfirst}}'s Cooler</a></li>
+                    <li class="tab"><a href="#"><i class="material-icons left">restaurant</i>{{user.first_name|capfirst}}'s Restaurants</a></li>
+                </ul>
+            </div>
+            {% endif %}
         </nav>
     </header>
     {% if messages %}
@@ -48,6 +55,7 @@
     {% endfor %}
     {% endif %}
     <main class="container">
+        <br>
         {% block content %}
         {% endblock %}
     </main>

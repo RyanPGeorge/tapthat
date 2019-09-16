@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
-<h1 class="grey-text text-darken-2"><i class="material-icons medium grey-text text-darken-2">local_drink</i> {{beer.name|capfirst}}</h1>
+<div class="inline">
+  <h1 class="grey-text text-darken-2"><i class="material-icons medium grey-text text-darken-2">local_drink</i> {{beer.name|capfirst}}</h1>
+  <a href="#modal1" class="btn-floating btn-large cyan pulse modal-trigger">tap it!</a>
+</div>
 
 <div class="row">
   <div class="col s8">
@@ -40,9 +42,8 @@
     </table>
     
     <br><br>
-    
     <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
-    <button type="submit" class="btn orange darken-4">Add to My Cooler</button>
+      <button type="submit" class="btn brown lighten-2">Add to My Cooler</button>
     {% csrf_token %}
     </form>
   </div>
@@ -66,11 +67,33 @@
     </ul>
   </div>
 </div>
+<div id="modal1" class="modal bottom-sheet">
+  <div class="modal-content">
+    <h4>Tap That Beer At A Restaurant!</h4>
+    <table>
+        {% for r in rests %}
+        <tr>
+          <th>{{ r.name }}</th>
+          <td>
+            <form action="">
+              <button class="btn cyan pulse">tap at this restaurant</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+  </div>
+</div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('.collapsible');
     var instances = M.Collapsible.init(elems);
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var modalEls = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(modalEls);
   });
 </script>
 
