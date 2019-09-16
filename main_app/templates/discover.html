@@ -13,18 +13,11 @@
                         <div class="card-content">
                             <span class="card-title">{{beer.name|capfirst}}</span>
                             <p>{{ beer.brewer|capfirst }} </p>
-                            {% if beer in cooler %}
                                 <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
                                     {% csrf_token %}
                                     <button type="submit" class="btn orange darken-4">Add to My Cooler</button>
                                 </form>
-                            {% else %}
-                                <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
-                                    {% csrf_token %}
-                                    <button type="submit" class="btn orange darken-4">Remove from My Cooler</button>
-                                </form>
-                            {% endif %}
-                        </div>
+                          </div>
                     </div>
                 </a>
             {% endfor %}

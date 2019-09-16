@@ -38,7 +38,6 @@ def discover(request):
     beers = Beer.objects.all()
     restaurants = Restaurant.objects.all()
     my_beers = LikeBeerUser.objects.filter(user=request.user)
-    print(my_beers)
     return render(request, 'discover.html', {
        'beers': beers,
        'restaurants': restaurants,
@@ -53,6 +52,7 @@ def beer_detail(request, beer_id):
 
 def restaurant_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
+  print(restaurant)
   return render(request, 'restaurants/restaurant_detail.html',
   {
       'restaurant': restaurant,
