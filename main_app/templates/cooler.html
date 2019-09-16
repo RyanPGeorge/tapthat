@@ -4,7 +4,7 @@
 <h1>My Cooler</h1>
 
 {% for b in my_beers %}
-<a href="{% url 'detail' b.beer.id %}">{{b.beer}}</a>
+  <a href="{% url 'detail' b.beer.id %}">{{b.beer}}</a>
 {% endfor %}
 
 {% endblock %}
