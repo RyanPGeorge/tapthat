@@ -45,6 +45,7 @@ def discover(request):
 
 def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
+    rests = Restaurant.objects.filter(beers_on_tap=beer_id)
     return render(request, 'beers/beer_detail.html',
     {
         'beer': beer,
