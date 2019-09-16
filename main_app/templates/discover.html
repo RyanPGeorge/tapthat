@@ -30,9 +30,9 @@
                 <div class="card hover">
                     <div class="card-content">
                         <span class="card-title">{{ restaurant.name|capfirst }} {{restaurant.location|capfirst}}</span>
-                        <form action="" method="POST">
+                        <form action="{% url 'cooler_add_restaurant' restaurant.id user.id %}" method="POST">
                             {% csrf_token %}
-                            <button type="submit" class="btn orange darken-4">Add to my cooler</button>
+                            <button type="submit" class="btn light-blue darken-4">Add to my restaurants</button>
                         </form>
                     </div>
                 </div>

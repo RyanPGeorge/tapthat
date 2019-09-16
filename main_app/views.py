@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from .forms import SignUpForm
-from .models import Beer, LikeBeerUser, Restaurant
+from .models import Beer, LikeBeerUser, Restaurant, LikeRestaurantUser
 
 # Create your views here.
 def landing(request):
@@ -34,6 +34,14 @@ def cooler_add(request, beer_id, user_id):
   messages.success(request, f'Successfully added {beer.name} to Cooler')
   return redirect('discover')
 
+def cooler_add_restaurant(request, restaurant_id, user_id):
+  rest = Restaurant.objects.get(id=restaurant_id)
+  user = User.objects.get(id=user_id)
+  add = LikeRestaurantUser(rest=rest, user=user)
+  add.save()
+  messages.success(request, f'Successfully added {rest.name} to Cooler')
+  return redirect('discover')
+
 def discover(request):
     beers = Beer.objects.all()
     restaurants = Restaurant.objects.all()
@@ -46,10 +54,12 @@ def discover(request):
 def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
     rests = Restaurant.objects.filter(beers_on_tap=beer_id)
+    untapped_rests = Restaurant.objects.exclude(beers_on_tap=beer_id)
     return render(request, 'beers/beer_detail.html',
     {
         'beer': beer,
-        'rests': rests
+        'rests': rests,
+        'untapped_rests': untapped_rests,
     })
 
 def restaurant_detail(request, restaurant_id):
