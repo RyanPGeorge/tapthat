@@ -22,8 +22,9 @@ def home(request):
 
 @login_required
 def cooler(request):
-    my_beers = LikeBeerUser.objects.filter(user = request.user)
-    return render(request, 'cooler.html', {'my_beers': my_beers})
+  my_beers = LikeBeerUser.objects.filter(user=request.user)
+  return render(request, 'cooler.html', { 'my_beers': my_beers})
+
 
 def cooler_add(request, beer_id, user_id):
   beer = Beer.objects.get(id=beer_id)
@@ -43,6 +44,14 @@ def beers_detail(request, beer_id):
     {
         'beer': beer,
     })
+
+def cooler_add(request, beer_id, user_id):
+  beer = Beer.objects.get(id=beer_id)
+  user = User.objects.get(id=user_id)
+  add = LikeBeerUser(beer=beer, user=user)
+  add.save()
+  messages.success(request, f'Successfully added {beer} to cooler')
+  return redirect('discover')
 
 def signup(request):
   if request.method == 'POST':
