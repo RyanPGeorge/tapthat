@@ -48,6 +48,7 @@ def beer_detail(request, beer_id):
     return render(request, 'beers/beer_detail.html',
     {
         'beer': beer,
+        'rests': rests
     })
 
 def restaurant_detail(request, restaurant_id):

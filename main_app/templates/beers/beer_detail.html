@@ -1,19 +1,77 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Details</h1>
 
-<p>{{beer.name}}</p>
-<p>{{beer.brewer}}</p>
-<p>{{beer.abv}}</p>
-<p>{{beer.ibu}}</p>
-<p>{{beer.style}}</p>
-<p>{{beer.taste_profile}}</p>
-<p>{{beer.get_container_type_display}}</p>
+<h1 class="grey-text text-darken-2"><i class="material-icons medium grey-text text-darken-2">local_drink</i> {{beer.name|capfirst}}</h1>
 
-<form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
-<button type="submit" class="btn orange darken-4">Add to My Cooler</button>
-{% csrf_token %}
-</form>
+<div class="row">
+  <div class="col s8">
+    <table>
+      <tr>
+        <th>Brewery:</th>
+        <td>  </td>
+        <td>{{beer.brewer|capfirst}}</td>
+      </tr>
+      <tr>
+        <th>ABV:</th>
+        <td>  </td>
+        <td>{{beer.abv}}%</td>
+      </tr>
+      <tr>
+        <th>IBU:</th>
+        <td>  </td>
+        <td>{{beer.ibu}}</td>
+      </tr>
+      <tr>
+        <th>Style:</th>
+        <td>  </td>
+        <td>{{beer.style|capfirst}}</td>
+      </tr>
+      <tr>
+        <th>Taste Profile:</th>
+        <td>  </td>
+        <td>{{beer.taste_profile|capfirst}}</td>
+      </tr>
+      <tr>
+        <th>Typical Container:</th>
+        <td>  </td>
+        <td>{{beer.get_container_type_display}}</td>
+      </tr>
+    </table>
+    
+    <br><br>
+    
+    <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
+    <button type="submit" class="btn orange darken-4">Add to My Cooler</button>
+    {% csrf_token %}
+    </form>
+  </div>
+  <div class="col s4">
+    <ul class="collapsible">
+      <li>
+        <div class="collapsible-header">See where this is tapped!</div>
+        <div class="collapsible-body">
+          search bar <br>
+          {% for r in rests %}
+            <p>{{ r.name }}</p>
+          {% endfor %}
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header">Upload a photo</div>
+        <div class="collapsible-body">
+          upload form 
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems);
+  });
+</script>
 
 {% endblock %}
