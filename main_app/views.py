@@ -36,16 +36,29 @@ def cooler_add(request, beer_id, user_id):
 
 def discover(request):
     beers = Beer.objects.all()
-    return render(request, 'discover.html', { 'beers': beers})
+    restaurants = Restaurant.objects.all()
+    my_beers = LikeBeerUser.objects.filter(user=request.user)
+    return render(request, 'discover.html', {
+       'beers': beers,
+       'restaurants': restaurants,
+       'my_beers': my_beers})
 
-def beers_detail(request, beer_id):
+def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
-    rests = Restaurant.objects.filter(beers_on_tap=beer_id)
-    return render(request, 'beers/detail.html',
+    return render(request, 'beers/beer_detail.html',
     {
         'beer': beer,
         'rests': rests
     })
+
+def restaurant_detail(request, restaurant_id):
+  restaurant = Restaurant.objects.get(id=restaurant_id)
+  print(restaurant)
+  return render(request, 'restaurants/restaurant_detail.html',
+  {
+      'restaurant': restaurant,
+  })
+
 
 def signup(request):
   if request.method == 'POST':

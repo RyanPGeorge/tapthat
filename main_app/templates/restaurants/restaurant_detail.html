@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{ restaurant.name }}</h1>
+<h2>{{ restaurant.location }}</h2>
+<h2>{{ restaurant.food_style }}</h2>
+
+<h4>Current Taps</h4>
+{% for beer in restaurant.beers_on_tap.all %}
+<p>{{ beer }}</p>
+{% endfor %}
+
+{% endblock %}
