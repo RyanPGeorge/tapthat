@@ -42,6 +42,7 @@ class LikeBeerUser(models.Model):
 class Restaurant(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
+    food_style = models.CharField(max_length=200)
     beers_on_tap = models.ManyToManyField(Beer)
 
     def __str__(self):
