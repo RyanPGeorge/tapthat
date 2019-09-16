@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from .forms import SignUpForm
-from .models import Beer, LikeBeerUser
+from .models import Beer, LikeBeerUser, Restaurant, LikeRestaurantUser
 
 # Create your views here.
 def landing(request):
@@ -22,8 +22,9 @@ def home(request):
 
 @login_required
 def cooler(request):
-    my_beers = LikeBeerUser.objects.filter(user=request.user)
-    return render(request, 'cooler.html', { 'my_beers': my_beers})
+  my_beers = LikeBeerUser.objects.filter(user=request.user)
+  return render(request, 'cooler.html', { 'my_beers': my_beers})
+
 
 def cooler_add(request, beer_id, user_id):
   beer = Beer.objects.get(id=beer_id)
@@ -33,24 +34,42 @@ def cooler_add(request, beer_id, user_id):
   messages.success(request, f'Successfully added {beer.name} to Cooler')
   return redirect('discover')
 
+def cooler_add_restaurant(request, restaurant_id, user_id):
+  rest = Restaurant.objects.get(id=restaurant_id)
+  user = User.objects.get(id=user_id)
+  add = LikeRestaurantUser(rest=rest, user=user)
+  add.save()
+  messages.success(request, f'Successfully added {rest.name} to Cooler')
+  return redirect('discover')
+
 def discover(request):
     beers = Beer.objects.all()
-    return render(request, 'discover.html', { 'beers': beers})
+    restaurants = Restaurant.objects.all()
+    my_beers = LikeBeerUser.objects.filter(user=request.user)
+    return render(request, 'discover.html', {
+       'beers': beers,
+       'restaurants': restaurants,
+       'my_beers': my_beers})
 
-def beers_detail(request, beer_id):
+def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
-    return render(request, 'beers/detail.html',
+    rests = Restaurant.objects.filter(beers_on_tap=beer_id)
+    untapped_rests = Restaurant.objects.exclude(beers_on_tap=beer_id)
+    return render(request, 'beers/beer_detail.html',
     {
         'beer': beer,
+        'rests': rests,
+        'untapped_rests': untapped_rests,
     })
 
-def cooler_add(request, beer_id, user_id):
-  beer = Beer.objects.get(id=beer_id)
-  user = User.objects.get(id=user_id)
-  add = LikeBeerUser(beer=beer, user=user)
-  add.save()
-  messages.success(request, f'Successfully added {beer} to cooler')
-  return redirect('discover')
+def restaurant_detail(request, restaurant_id):
+  restaurant = Restaurant.objects.get(id=restaurant_id)
+  print(restaurant)
+  return render(request, 'restaurants/restaurant_detail.html',
+  {
+      'restaurant': restaurant,
+  })
+
 
 def signup(request):
   if request.method == 'POST':
