@@ -11,6 +11,9 @@
 <p>{{beer.taste_profile}}</p>
 <p>{{beer.get_container_type_display}}</p>
 
-
+<form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
+<button type="submit" class="btn orange darken-4">Add to My Cooler</button>
+{% csrf_token %}
+</form>
 
 {% endblock %}

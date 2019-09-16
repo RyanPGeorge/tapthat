@@ -6,6 +6,10 @@
 {% for beer in beers %}
     <p>
         <a href="{% url 'detail' beer.id %}">{{beer.name}}</a>
+        <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn orange darken-4">Add to my cooler</button>
+        </form>
     </p>
 {% endfor %}
 

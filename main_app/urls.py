@@ -11,4 +11,5 @@ urlpatterns = [
     path('home/cooler/', views.cooler, name='cooler'),
     path('discover/', views.discover, name='discover'),
     path('beers/<int:beer_id>/', views.beers_detail, name='detail'),
+    path('cooler/<int:beer_id>/add/<int:user_id>', views.cooler_add, name='cooler_add'),
 ]
