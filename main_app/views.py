@@ -37,9 +37,12 @@ def cooler_add(request, beer_id, user_id):
 def discover(request):
     beers = Beer.objects.all()
     restaurants = Restaurant.objects.all()
+    my_beers = LikeBeerUser.objects.filter(user=request.user)
+    print(my_beers)
     return render(request, 'discover.html', {
        'beers': beers,
-       'restaurants': restaurants,})
+       'restaurants': restaurants,
+       'my_beers': my_beers})
 
 def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
