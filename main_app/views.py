@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from .forms import SignUpForm
-from .models import Beer, LikeBeerUser
+from .models import Beer, LikeBeerUser, Restaurant
 
 # Create your views here.
 def landing(request):
@@ -41,12 +41,20 @@ def discover(request):
        'beers': beers,
        'restaurants': restaurants,})
 
-def beers_detail(request, beer_id):
+def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
-    return render(request, 'beers/detail.html',
+    return render(request, 'beers/beer_detail.html',
     {
         'beer': beer,
     })
+
+def restaurant_detail(request, restaurant_id):
+  restaurant = Restaurant.objects.get(id=restaurant_id)
+  return render(request, 'restaurants/restaurant_detail.html',
+  {
+      'restaurant': restaurant,
+  })
+
 
 def signup(request):
   if request.method == 'POST':

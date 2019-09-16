@@ -6,7 +6,7 @@
 <div class="row">
 {% for b in my_beers %}
   <div class="col s6">
-    <a href="{% url 'detail' b.beer.id %}">
+    <a href="{% url 'beer_detail' b.beer.id %}">
       <div class="card hover">
         <div class="card-content">
           <span class="card-title"><h3>{{ b.beer|capfirst }}</h3></span>
