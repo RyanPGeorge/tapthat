@@ -39,7 +39,7 @@ def discover(request):
     restaurants = Restaurant.objects.all()
     return render(request, 'discover.html', {
        'beers': beers,
-       'restaurants: restaurants',})
+       'restaurants': restaurants,})
 
 def beers_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
