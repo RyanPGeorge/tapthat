@@ -20,7 +20,8 @@ def about(request):
 @login_required
 def home(request):
     recent_beers_added = Beer.objects.filter().order_by('-id')[0:5]
-    return render(request, 'home.html', {'recent_beers': recent_beers_added})
+    restaurants = Restaurant.objects.all()
+    return render(request, 'home.html', {'recent_beers': recent_beers_added, 'restaurants': restaurants})
 
 @login_required
 def cooler(request):
