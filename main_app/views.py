@@ -71,6 +71,16 @@ def discover(request):
        'my_beers_list': my_beers_list,
        })
 
+def search(request):
+  beers = Beer.objects.filter(name__icontains=request.GET['search_query'])
+  restaurants = Restaurant.objects.filter(name__icontains=request.GET['search_query'])
+  my_beers = LikeBeerUser.objects.filter(user=request.user)
+  print(request.GET['search_query'])
+  return render(request, 'discover.html', {
+       'beers': beers,
+       'restaurants': restaurants,
+       'my_beers': my_beers})
+
 def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
     my_beers = LikeBeerUser.objects.filter(user=request.user)

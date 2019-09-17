@@ -16,4 +16,6 @@ urlpatterns = [
     path('cooler/<int:beer_id>/remove/<int:user_id>', views.cooler_remove, name='cooler_remove'),
     path('restaurants/<int:restaurant_id>/', views.restaurant_detail, name='restaurant_detail'),
     path('cooler/<int:restaurant_id>/add/<int:user_id>,', views.restaurant_add, name='restaurant_add'),
+    path('discover/search/', views.search, name='search'),
+
 ]
