@@ -10,4 +10,16 @@
 <p>{{ beer }}</p>
 {% endfor %}
 
+{% if restaurant.name in my_rests_list %}  
+<form action="{% url 'restaurant_remove' restaurant.id user.id %}" method="POST">
+    <button type="submit" class="btn brown lighten-2">Untrack this Restaurant</button>
+    {% csrf_token %}
+</form>
+{% else %}
+<form action="{% url 'restaurant_add' restaurant.id user.id %}" method="POST">
+    <button type="submit" class="btn brown lighten-2">Track this Restaurant</button>
+    {% csrf_token %}
+</form>
+{% endif %}
+
 {% endblock %}
