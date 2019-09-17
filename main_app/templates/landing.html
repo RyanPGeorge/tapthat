@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container">
+<div class="container center">
   <h1>TapThat</h1>  
 </div>
 
 <div class="container">
   <p>TapThat is designed to connect Brewers, Restaurants, and Beer enthusiasts through an intuitive “check-in” system that tracks your favorite beers and where to find them.</p>  
+</div>
+
+
+<div class="container">
+ <p><a href="{% url 'signup' %}"><i class="material-icons left">add_circle</i>Sign Up</a></p>
+</div>
+
+<div class="container">
+ <p><a href="{% url 'login' %}"><i class="material-icons left">lock_open</i>Already a User? Login!</a></p>
 </div>
 
 
