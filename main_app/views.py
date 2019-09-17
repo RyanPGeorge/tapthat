@@ -56,7 +56,7 @@ def restaurant_add(request, restaurant_id, user_id):
   user = User.objects.get(id=user_id)
   add = LikeRestaurantUser(rest=rest, user=user)
   add.save()
-  messages.success(request, f'You are now tracking {rest.name} at {rest.location}')
+  messages.success(request, f'You are now tracking {rest.name} in {rest.location}')
   return HttpResponse('<script>history.back();</script>')
 
 @login_required
@@ -64,7 +64,7 @@ def restaurant_remove(request, restaurant_id, user_id):
   rest = Restaurant.objects.get(id=restaurant_id)
   rm_rest = LikeRestaurantUser.objects.get(rest=restaurant_id, user=user_id)
   rm_rest.delete()
-  messages.success(request, f'You are no longer tracking {rest.name} at {rest.location}')
+  messages.success(request, f'You are no longer tracking {rest.name} in {rest.location}')
   return HttpResponse('<script>history.back();</script>')
 
 
