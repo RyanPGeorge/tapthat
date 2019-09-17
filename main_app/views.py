@@ -25,6 +25,10 @@ def cooler(request):
   my_beers = LikeBeerUser.objects.filter(user=request.user)
   return render(request, 'cooler.html', { 'my_beers': my_beers})
 
+@login_required
+def my_restaurants(request):
+  my_rests = LikeRestaurantUser.objects.filter(user=request.user)
+  return render(request, 'my_restaurants.html', { 'my_rests': my_rests })
 
 def cooler_add(request, beer_id, user_id):
   beer = Beer.objects.get(id=beer_id)
