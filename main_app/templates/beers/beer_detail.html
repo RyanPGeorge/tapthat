@@ -42,10 +42,21 @@
     </table>
     
     <br><br>
-    <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
-      <button type="submit" class="btn brown lighten-2">Add to My Cooler</button>
-    {% csrf_token %}
+   
+    {% if present %}  
+    <form action="" method="POST">
+        <button type="submit" class="btn brown lighten-2">Remove from My Cooler</button>
+        {% csrf_token %}
     </form>
+    {% else %}
+    <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
+        <button type="submit" class="btn brown lighten-2">Add to My Cooler</button>
+        {% csrf_token %}
+    </form>
+    {% endif %}
+    
+   
+
   </div>
   <div class="col s4">
     <ul class="collapsible">

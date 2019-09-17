@@ -57,6 +57,13 @@ def discover(request):
 
 def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
+    my_beers = LikeBeerUser.objects.filter(user=request.user)
+    present = None
+    for b in my_beers:
+      if beer == b.beer:
+        present = True
+      else:
+        present = False
     rests = Restaurant.objects.filter(beers_on_tap=beer_id)
     untapped_rests = Restaurant.objects.exclude(beers_on_tap=beer_id)
     return render(request, 'beers/beer_detail.html',
@@ -64,6 +71,7 @@ def beer_detail(request, beer_id):
         'beer': beer,
         'rests': rests,
         'untapped_rests': untapped_rests,
+        'present': present,
     })
 
 def restaurant_detail(request, restaurant_id):
