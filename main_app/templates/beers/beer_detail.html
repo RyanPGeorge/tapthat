@@ -43,8 +43,8 @@
     
     <br><br>
    
-    {% if present %}  
-    <form action="" method="POST">
+    {% if beer.name in my_beers_list %}  
+    <form action="{% url 'cooler_remove' beer.id user.id %}" method="POST">
         <button type="submit" class="btn brown lighten-2">Remove from My Cooler</button>
         {% csrf_token %}
     </form>

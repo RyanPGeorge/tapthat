@@ -18,8 +18,7 @@ def about(request):
 
 @login_required
 def home(request):
-    recent_beers_added = Beer.objects.filter().order_by('-id')[0:5]
-    return render(request, 'home.html', {'recent_beers': recent_beers_added})
+    return render(request, 'home.html')
 
 @login_required
 def cooler(request):
@@ -38,25 +37,39 @@ def cooler_add(request, beer_id, user_id):
   add = LikeBeerUser(beer=beer, user=user)
   add.save()
   messages.success(request, f'Successfully added {beer.name} to Cooler')
-  return redirect('discover')
+  return HttpResponse('<script>history.back();</script>')
 
 @login_required
-def cooler_add_restaurant(request, restaurant_id, user_id):
+def cooler_remove(request, beer_id, user_id):
+  beer = Beer.objects.get(id=beer_id)
+  rm_beer = LikeBeerUser.objects.get(beer=beer_id, user=user_id)
+  rm_beer.delete()
+  messages.success(request, f'Successfully removed {beer.name} from Cooler')
+  return HttpResponse('<script>history.back();</script>')
+
+
+@login_required
+def restaurant_add(request, restaurant_id, user_id):
   rest = Restaurant.objects.get(id=restaurant_id)
   user = User.objects.get(id=user_id)
   add = LikeRestaurantUser(rest=rest, user=user)
   add.save()
-  messages.success(request, f'Successfully added {rest.name} to Cooler')
+  messages.success(request, f'You are now tracking {rest.name} at {rest.location}')
   return redirect('discover')
 
 def discover(request):
     beers = Beer.objects.all()
     restaurants = Restaurant.objects.all()
     my_beers = LikeBeerUser.objects.filter(user=request.user)
+    my_beers_list = []
+    for b in my_beers:
+      my_beers_list.append(b.beer.name)
     return render(request, 'discover.html', {
        'beers': beers,
        'restaurants': restaurants,
-       'my_beers': my_beers})
+       'my_beers': my_beers,
+       'my_beers_list': my_beers_list,
+       })
 
 def search(request):
   beers = Beer.objects.filter(name__icontains=request.GET['search_query'])
@@ -71,12 +84,9 @@ def search(request):
 def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
     my_beers = LikeBeerUser.objects.filter(user=request.user)
-    present = None
+    my_beers_list = []
     for b in my_beers:
-      if beer == b.beer:
-        present = True
-      else:
-        present = False
+      my_beers_list.append(b.beer.name)
     rests = Restaurant.objects.filter(beers_on_tap=beer_id)
     untapped_rests = Restaurant.objects.exclude(beers_on_tap=beer_id)
     return render(request, 'beers/beer_detail.html',
@@ -84,7 +94,7 @@ def beer_detail(request, beer_id):
         'beer': beer,
         'rests': rests,
         'untapped_rests': untapped_rests,
-        'present': present,
+        'my_beers_list': my_beers_list,
     })
 
 def restaurant_detail(request, restaurant_id):

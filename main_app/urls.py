@@ -13,7 +13,9 @@ urlpatterns = [
     path('discover/', views.discover, name='discover'),
     path('beers/<int:beer_id>/', views.beer_detail, name='beer_detail'),
     path('cooler/<int:beer_id>/add/<int:user_id>', views.cooler_add, name='cooler_add'),
+    path('cooler/<int:beer_id>/remove/<int:user_id>', views.cooler_remove, name='cooler_remove'),
     path('restaurants/<int:restaurant_id>/', views.restaurant_detail, name='restaurant_detail'),
-    path('cooler/<int:restaurant_id>/add/<int:user_id>,', views.cooler_add_restaurant, name='cooler_add_restaurant'),
+    path('cooler/<int:restaurant_id>/add/<int:user_id>,', views.restaurant_add, name='restaurant_add'),
     path('discover/search/', views.search, name='search'),
+
 ]
