@@ -114,10 +114,15 @@ def beer_detail(request, beer_id):
 
 def restaurant_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
-  print(restaurant)
+  my_rests = LikeRestaurantUser.objects.filter(user=request.user)
+  my_rests_list = []
+  for r in my_rests:
+    my_rests_list.append(r.rest.name)
   return render(request, 'restaurants/restaurant_detail.html',
   {
       'restaurant': restaurant,
+      'my_rests': my_rests,
+      'my_rests_list': my_rests_list,
   })
 
 
