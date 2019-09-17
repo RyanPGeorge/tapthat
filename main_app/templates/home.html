@@ -18,6 +18,20 @@
       {% endfor %}
     </ul>
   </div>
+  <div class="col s6">
+    <ul class="collection with-header">
+      <li class="collection-header"><h4>TapThat Stats:</h4></li>
+      {% for beer in recent_beers %}
+        <li class="collection-item avatar">
+          <i class="material-icons circle">whatshot</i>
+          <span class="title">{{beer.name}}</span>
+          <p> Brewed by: {{beer.brewer}}</p>
+          <p>Style: {{beer.style}}</p>
+          <p>ABV: {{beer.abv}}% | IBU: {{beer.ibu}}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
 {% endblock %}

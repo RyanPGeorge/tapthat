@@ -15,4 +15,5 @@ urlpatterns = [
     path('cooler/<int:beer_id>/add/<int:user_id>', views.cooler_add, name='cooler_add'),
     path('restaurants/<int:restaurant_id>/', views.restaurant_detail, name='restaurant_detail'),
     path('cooler/<int:restaurant_id>/add/<int:user_id>,', views.cooler_add_restaurant, name='cooler_add_restaurant'),
+    path('discover/search/', views.search, name='search'),
 ]
