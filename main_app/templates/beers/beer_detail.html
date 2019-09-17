@@ -82,9 +82,9 @@
   <div class="modal-content">
     <h4>Tap That Beer At A Restaurant!</h4>
     <table>
-        {% for r in untapped_rests %}
+        {% for untapped in untapped_rests %}
         <tr>
-          <th>{{ r.name }}</th>
+          <th>{{ untapped.name }}</th>
           <td>
             <form action="">
               <button class="btn cyan pulse">tap at this restaurant</button>
