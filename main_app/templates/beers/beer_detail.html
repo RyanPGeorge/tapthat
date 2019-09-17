@@ -3,7 +3,7 @@
 
 <div class="inline">
   <h1 class="grey-text text-darken-2"><i class="material-icons medium grey-text text-darken-2">local_drink</i> {{beer.name|capfirst}}</h1>
-  <a href="#modal1" class="btn-floating btn-large cyan pulse modal-trigger">tap it!</a>
+  <a href="#modal1" class="btn-floating btn-large cyan lighten-3 pulse modal-trigger">tap it!</a>
 </div>
 
 <div class="row">
@@ -42,10 +42,21 @@
     </table>
     
     <br><br>
-    <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
-      <button type="submit" class="btn brown lighten-2">Add to My Cooler</button>
-    {% csrf_token %}
+   
+    {% if present %}  
+    <form action="" method="POST">
+        <button type="submit" class="btn brown lighten-2">Remove from My Cooler</button>
+        {% csrf_token %}
     </form>
+    {% else %}
+    <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
+        <button type="submit" class="btn brown lighten-2">Add to My Cooler</button>
+        {% csrf_token %}
+    </form>
+    {% endif %}
+    
+   
+
   </div>
   <div class="col s4">
     <ul class="collapsible">

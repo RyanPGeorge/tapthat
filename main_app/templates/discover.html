@@ -32,7 +32,7 @@
                         <span class="card-title">{{ restaurant.name|capfirst }} {{restaurant.location|capfirst}}</span>
                         <form action="{% url 'cooler_add_restaurant' restaurant.id user.id %}" method="POST">
                             {% csrf_token %}
-                            <button type="submit" class="btn light-blue darken-4">Add to my restaurants</button>
+                            <button type="submit" class="btn amber darken-4">Add to my restaurants</button>
                         </form>
                     </div>
                 </div>

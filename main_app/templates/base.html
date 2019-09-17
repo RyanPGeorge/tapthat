@@ -35,7 +35,7 @@
                 <ul class="tabs tabs-transparent brown darken-2">
                     <li class="tab"><a href="{% url 'home' %}"><i class="material-icons left">home</i>{{user.first_name|capfirst}}'s home</a></li>
                     <li class="tab"><a href="{% url 'cooler' %}"><i class="material-icons left">ac_unit</i>{{user.first_name|capfirst}}'s Cooler</a></li>
-                    <li class="tab"><a href="#"><i class="material-icons left">restaurant</i>{{user.first_name|capfirst}}'s Restaurants</a></li>
+                    <li class="tab"><a href="{% url 'my_restaurants' %}"><i class="material-icons left">restaurant</i>{{user.first_name|capfirst}}'s Restaurants</a></li>
                 </ul>
             </div>
             {% endif %}
