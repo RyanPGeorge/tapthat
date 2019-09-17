@@ -86,7 +86,7 @@
         <tr>
           <th>{{ untapped.name }}</th>
           <td>
-            <form action="">
+            <form action="{% url 'tap_to_rest' beer.id untapped.id %}">
               <button class="btn cyan pulse">tap at this restaurant</button>
             </form>
           </td>
