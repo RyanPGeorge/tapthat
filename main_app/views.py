@@ -55,20 +55,35 @@ def restaurant_add(request, restaurant_id, user_id):
   add = LikeRestaurantUser(rest=rest, user=user)
   add.save()
   messages.success(request, f'You are now tracking {rest.name} at {rest.location}')
-  return redirect('discover')
+  return HttpResponse('<script>history.back();</script>')
+
+@login_required
+def restaurant_remove(request, restaurant_id, user_id):
+  rest = Restaurant.objects.get(id=restaurant_id)
+  rm_rest = LikeRestaurantUser.objects.get(rest=restaurant_id, user=user_id)
+  rm_rest.delete()
+  messages.success(request, f'You are no longer tracking {rest.name} at {rest.location}')
+  return HttpResponse('<script>history.back();</script>')
+
 
 def discover(request):
     beers = Beer.objects.all()
-    restaurants = Restaurant.objects.all()
     my_beers = LikeBeerUser.objects.filter(user=request.user)
     my_beers_list = []
+    restaurants = Restaurant.objects.all()
+    my_rests = LikeRestaurantUser.objects.filter(user=request.user)
+    my_rests_list = []
     for b in my_beers:
       my_beers_list.append(b.beer.name)
+    for r in my_rests:
+      my_rests_list.append(r.rest.name)
     return render(request, 'discover.html', {
        'beers': beers,
-       'restaurants': restaurants,
        'my_beers': my_beers,
        'my_beers_list': my_beers_list,
+       'restaurants': restaurants,
+       'my_rests': my_rests,
+       'my_rests_list': my_rests_list,
        })
 
 def search(request):
