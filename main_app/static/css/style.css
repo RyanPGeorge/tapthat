@@ -26,6 +26,9 @@ table {
 
 .collapsible-body {
   background-color: rgba(255, 255, 255, 0.60);
+  height: 30vh;
+  overflow: scroll;
+  transition: 750ms;
 }
 
 .inline {

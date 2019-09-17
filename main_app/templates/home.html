@@ -21,17 +21,24 @@
   <div class="col s12 m6 l6">
     <ul class="collection with-header">
       <li class="collection-header"><h4>TapThat Stats:</h4></li>
-      {% for beer in recent_beers %}
+      {% for restaurant in restaurants %}
         <li class="collection-item avatar">
-          <i class="material-icons circle">whatshot</i>
-          <span class="title">{{beer.name}}</span>
-          <p> Brewed by: {{beer.brewer}}</p>
-          <p>Style: {{beer.style}}</p>
-          <p>ABV: {{beer.abv}}% | IBU: {{beer.ibu}}</p>
+            <i class="material-icons circle">restaurant</i>
+          <span class="title">{{restaurant.name}}</span>
+          <p>{{restaurant.location}}</p>
+          <p>Style: {{restaurant.food_style}}</p>
+          <p>Beers on tap: {{restaurant.beers_on_tap.count}}</p>
         </li>
       {% endfor %}
+      
     </ul>
   </div>
 </div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  var elems = document.querySelectorAll('.collapsible');
+  var instances = M.Collapsible.init(elems, options);
+});
+</script>
 
 {% endblock %}
