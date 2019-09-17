@@ -28,8 +28,9 @@ def cooler(request):
 @login_required
 def my_restaurants(request):
   my_rests = LikeRestaurantUser.objects.filter(user=request.user)
-  return render(request, 'my_restaurants.html', {'my_rests': my_rests})
+  return render(request, 'my_restaurants.html', { 'my_rests': my_rests })
 
+@login_required
 def cooler_add(request, beer_id, user_id):
   beer = Beer.objects.get(id=beer_id)
   user = User.objects.get(id=user_id)
@@ -38,6 +39,7 @@ def cooler_add(request, beer_id, user_id):
   messages.success(request, f'Successfully added {beer.name} to Cooler')
   return redirect('discover')
 
+@login_required
 def cooler_add_restaurant(request, restaurant_id, user_id):
   rest = Restaurant.objects.get(id=restaurant_id)
   user = User.objects.get(id=user_id)
@@ -57,6 +59,13 @@ def discover(request):
 
 def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
+    my_beers = LikeBeerUser.objects.filter(user=request.user)
+    present = None
+    for b in my_beers:
+      if beer == b.beer:
+        present = True
+      else:
+        present = False
     rests = Restaurant.objects.filter(beers_on_tap=beer_id)
     untapped_rests = Restaurant.objects.exclude(beers_on_tap=beer_id)
     return render(request, 'beers/beer_detail.html',
@@ -64,6 +73,7 @@ def beer_detail(request, beer_id):
         'beer': beer,
         'rests': rests,
         'untapped_rests': untapped_rests,
+        'present': present,
     })
 
 def restaurant_detail(request, restaurant_id):
