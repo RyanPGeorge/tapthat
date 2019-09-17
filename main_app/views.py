@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.db.models import Q
 
 from .forms import SignUpForm
 from .models import Beer, LikeBeerUser, Restaurant, LikeRestaurantUser
@@ -18,7 +19,8 @@ def about(request):
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    recent_beers_added = Beer.objects.filter().order_by('-id')[0:5]
+    return render(request, 'home.html', {'recent_beers': recent_beers_added})
 
 @login_required
 def cooler(request):
@@ -72,7 +74,7 @@ def discover(request):
        })
 
 def search(request):
-  beers = Beer.objects.filter(name__icontains=request.GET['search_query'])
+  beers = Beer.objects.filter(Q(name__icontains=request.GET['search_query']) | Q(brewer__icontains=request.GET['search_query']))
   restaurants = Restaurant.objects.filter(name__icontains=request.GET['search_query'])
   my_beers = LikeBeerUser.objects.filter(user=request.user)
   print(request.GET['search_query'])
