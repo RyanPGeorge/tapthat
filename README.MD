@@ -36,7 +36,7 @@ How Does It Work?
   
 * Users can save their favorite beers to their "cooler", to keep track of where there favorite brew is on tap.
 
-* Users can also track restraunts that currently have their favorite beers on tap.
+* Users can also track restaurants that currently have their favorite beers on tap.
 
 <br>
 
