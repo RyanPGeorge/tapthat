@@ -83,10 +83,8 @@ def discover(request):
       my_rests_list.append(r.rest.name)
     return render(request, 'discover.html', {
        'beers': beers,
-       'my_beers': my_beers,
        'my_beers_list': my_beers_list,
        'restaurants': restaurants,
-       'my_rests': my_rests,
        'my_rests_list': my_rests_list,
        })
 
@@ -116,6 +114,7 @@ def beer_detail(request, beer_id):
         'my_beers_list': my_beers_list,
     })
 
+@login_required
 def tap_to_rest(request, beer_id, restaurant_id):
   beer = Beer.objects.get(id=beer_id)
   my_beers = LikeBeerUser.objects.filter(user=request.user)
@@ -134,6 +133,21 @@ def tap_to_rest(request, beer_id, restaurant_id):
         'my_beers_list': my_beers_list,
   })
 
+@login_required
+def untap_from_rest(request, beer_id, restaurant_id):
+  beer = Beer.objects.get(id=beer_id)
+  restaurant = Restaurant.objects.get(id=restaurant_id)
+  restaurant.beers_on_tap.delete(beer)
+  my_rests = LikeRestaurantUser.objects.filter(user=request.user)
+  my_rests_list = []
+  for r in my_rests:
+    my_rests_list.append(r.rest.name)
+  return render(request, 'restaurants/restaurant_detail.html',
+  {
+    'restaurant': restaurant,
+    'my_rests_list': my_rests_list,
+  })
+
 def restaurant_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
   my_rests = LikeRestaurantUser.objects.filter(user=request.user)
@@ -143,7 +157,6 @@ def restaurant_detail(request, restaurant_id):
   return render(request, 'restaurants/restaurant_detail.html',
   {
       'restaurant': restaurant,
-      'my_rests': my_rests,
       'my_rests_list': my_rests_list,
   })
 
