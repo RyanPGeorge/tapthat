@@ -52,7 +52,11 @@
                 <i class="material-icons circle">local_drink</i>
                 <span class="title">{{beer.name}}</span>
                 <p>{{beer.brewer}}</p>
-                <p>Tapped at {{beer.restaurant_set.all.count}} restaurants!</p>
+                {% if beer.restaurant_set.all.count == 1 %}
+                <p>Tapped at 1 Restaurant!</p>
+                {% else %}
+                <p>Tapped at {{beer.restaurant_set.all.count}} Restaurants!</p>
+                {% endif %}
                 <div class="divider"></div>
               </li>
             </a>

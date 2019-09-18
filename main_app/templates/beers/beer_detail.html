@@ -67,7 +67,7 @@
   <div class="col s12 m4 l4">
     <ul class="collapsible">
       <li>
-        <div class="collapsible-header">See where this is tapped!</div>
+        <div class="collapsible-header">See where {{beer.name|capfirst}} is tapped!</div>
         <div class="collapsible-body">
 
           {% for r in rests %}
@@ -102,7 +102,7 @@
 </div>
 <div id="modal1" class="modal bottom-sheet">
   <div class="modal-content">
-    <h4>Tap That Beer At A Restaurant!</h4>
+  <h4>Tap this Beer at a Restaurant!</h4>
     <table>
         {% for untapped in untapped_rests %}
         <tr>
