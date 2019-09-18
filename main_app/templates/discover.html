@@ -24,12 +24,12 @@
                                 {% if beer.name in my_beers_list %}
                                     <form action="{% url 'cooler_remove' beer.id user.id %}" method="POST">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn-small red darken-4">Remove from My Cooler</button>
+                                        <button type="submit" class="btn-small red darken-2">Remove from My Cooler</button>
                                     </form>
                                 {% else %}
                                     <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn-small orange darken-4">Add to My Cooler</button>
+                                        <button type="submit" class="btn-small btn blue darken-2">Add to My Cooler</button>
                                     </form>
                                 {% endif %}
                           </div>
@@ -48,12 +48,12 @@
                         {% if restaurant.name in my_rests_list %}
                             <form action="{% url 'restaurant_remove' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn-small amber darken-4">Remove from my restaurants</button>
+                                <button type="submit" class="btn-small red darken-4">Remove from my restaurants</button>
                             </form>   
                         {% else %}
                             <form action="{% url 'restaurant_add' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn-small amber darken-4">Add to my restaurants</button>
+                                <button type="submit" class="btn brown lighten-2">Add to my restaurants</button>
                             </form>
                         {% endif %}
                     </div>

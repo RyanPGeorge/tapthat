@@ -135,9 +135,8 @@ def tap_to_rest(request, beer_id, restaurant_id):
 
 @login_required
 def untap_from_rest(request, beer_id, restaurant_id):
-  beer = Beer.objects.get(id=beer_id)
   restaurant = Restaurant.objects.get(id=restaurant_id)
-  restaurant.beers_on_tap.delete(beer)
+  restaurant.beers_on_tap.filter(id=beer_id).delete()
   my_rests = LikeRestaurantUser.objects.filter(user=request.user)
   my_rests_list = []
   for r in my_rests:

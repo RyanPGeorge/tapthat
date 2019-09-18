@@ -38,7 +38,7 @@
                     <td><a class="dropdown-trigger" data-target="dropdown1" href="#">{{beer.name}}</a></td>
                     <ul id='dropdown1' class='dropdown-content'>
                         <li><a href="{% url 'beer_detail' beer.id %}">See beer details! </a></li>
-                        <li><a href="#!">Untap Beer :( </a></li>
+                        <li><a href="{% url 'untap_from_rest' beer.id restaurant.id %}">Untap Beer :( </a></li>
                     </ul>
                     <td>{{beer.brewer}}</td>
                     <td>{{beer.style}}</td>
