@@ -48,12 +48,12 @@
                         {% if restaurant.name in my_rests_list %}
                             <form action="{% url 'restaurant_remove' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn-small red darken-4">Remove from my restaurants</button>
+                                <button type="submit" class="btn-small red darken-4">Track this restaurant</button>
                             </form>   
                         {% else %}
                             <form action="{% url 'restaurant_add' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn brown lighten-2">Add to my restaurants</button>
+                                <button type="submit" class="btn brown lighten-2">Untrack this restaurant</button>
                             </form>
                         {% endif %}
                     </div>
