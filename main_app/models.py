@@ -64,3 +64,11 @@ class LikeRestaurantUser(models.Model):
 
     def __str__(self):
         return f"{self.rest} in {self.user}'s Cooler"
+
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"beer_id photo: {self.beer_id} @{self.url}"
