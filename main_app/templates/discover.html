@@ -46,7 +46,7 @@
                     <div class="card-content">
                         <span class="card-title">{{ restaurant.name|capfirst }} {{restaurant.location|capfirst}}</span>
                         {% if restaurant.name in my_rests_list %}
-                            <form action="{% url 'restaurant_add' restaurant.id user.id %}" method="POST">
+                            <form action="{% url 'restaurant_remove' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
                                 <button type="submit" class="btn-small amber darken-4">Remove from my restaurants</button>
                             </form>   

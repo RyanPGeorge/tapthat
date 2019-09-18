@@ -63,6 +63,7 @@
       <li>
         <div class="collapsible-header">See where this is tapped!</div>
         <div class="collapsible-body">
+
           {% for r in rests %}
             <a href="{% url 'restaurant_detail' r.id %}">
               <h6>{{ r.name }}</h6>
@@ -97,7 +98,7 @@
         <tr>
           <th>{{ untapped.name }}</th>
           <td>
-            <form action="">
+            <form action="{% url 'tap_to_rest' beer.id untapped.id %}">
               <button class="btn cyan pulse">tap at this restaurant</button>
             </form>
           </td>

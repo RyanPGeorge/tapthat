@@ -58,7 +58,7 @@ def restaurant_add(request, restaurant_id, user_id):
   user = User.objects.get(id=user_id)
   add = LikeRestaurantUser(rest=rest, user=user)
   add.save()
-  messages.success(request, f'You are now tracking {rest.name} at {rest.location}')
+  messages.success(request, f'You are now tracking {rest.name} in {rest.location}')
   return HttpResponse('<script>history.back();</script>')
 
 @login_required
@@ -66,7 +66,7 @@ def restaurant_remove(request, restaurant_id, user_id):
   rest = Restaurant.objects.get(id=restaurant_id)
   rm_rest = LikeRestaurantUser.objects.get(rest=restaurant_id, user=user_id)
   rm_rest.delete()
-  messages.success(request, f'You are no longer tracking {rest.name} at {rest.location}')
+  messages.success(request, f'You are no longer tracking {rest.name} in {rest.location}')
   return HttpResponse('<script>history.back();</script>')
 
 
@@ -115,6 +115,24 @@ def beer_detail(request, beer_id):
         'untapped_rests': untapped_rests,
         'my_beers_list': my_beers_list,
     })
+
+def tap_to_rest(request, beer_id, restaurant_id):
+  beer = Beer.objects.get(id=beer_id)
+  my_beers = LikeBeerUser.objects.filter(user=request.user)
+  rest = Restaurant.objects.get(id=restaurant_id)
+  rest.beers_on_tap.add(beer)
+  rests = Restaurant.objects.filter(beers_on_tap=beer_id)
+  untapped_rests = Restaurant.objects.exclude(beers_on_tap=beer_id)
+  my_beers_list = []
+  for b in my_beers:
+    my_beers_list.append(b.beer.name)
+  return render(request, 'beers/beer_detail.html',
+  {
+        'beer': beer,
+        'rests': rests,
+        'untapped_rests': untapped_rests,
+        'my_beers_list': my_beers_list,
+  })
 
 def restaurant_detail(request, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
