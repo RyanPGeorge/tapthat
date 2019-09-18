@@ -1,4 +1,4 @@
-<div style="text-align:center">![tapthat-logo](images/tap-that-logo.png "Logo")</div>
+![tapthat-logo](images/tap-that-logo.png "Logo")
 =====
 
 Connecting You to Brew.
