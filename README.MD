@@ -34,7 +34,9 @@ How Does It Work?
   
 * Public Users may log-in to browse the app to search for their favorite beers or discover new beers.
   
-* Users can save their favorite beers to their user profile, to keep track of where there favorite brew is on tap.
+* Users can save their favorite beers to their "cooler", to keep track of where there favorite brew is on tap.
+
+* Users can also track restraunts that currently have their favorite beers on tap.
 
 <br>
 
