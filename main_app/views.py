@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -41,7 +41,7 @@ def cooler_add(request, beer_id, user_id):
   add = LikeBeerUser(beer=beer, user=user)
   add.save()
   messages.success(request, f'Successfully added {beer.name} to Cooler')
-  return HttpResponse('<script>history.back();</script>')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required
 def cooler_remove(request, beer_id, user_id):
@@ -49,7 +49,7 @@ def cooler_remove(request, beer_id, user_id):
   rm_beer = LikeBeerUser.objects.get(beer=beer_id, user=user_id)
   rm_beer.delete()
   messages.success(request, f'Successfully removed {beer.name} from Cooler')
-  return HttpResponse('<script>history.back();</script>')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -59,7 +59,7 @@ def restaurant_add(request, restaurant_id, user_id):
   add = LikeRestaurantUser(rest=rest, user=user)
   add.save()
   messages.success(request, f'You are now tracking {rest.name} in {rest.location}')
-  return HttpResponse('<script>history.back();</script>')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 @login_required
 def restaurant_remove(request, restaurant_id, user_id):
@@ -67,7 +67,7 @@ def restaurant_remove(request, restaurant_id, user_id):
   rm_rest = LikeRestaurantUser.objects.get(rest=restaurant_id, user=user_id)
   rm_rest.delete()
   messages.success(request, f'You are no longer tracking {rest.name} in {rest.location}')
-  return HttpResponse('<script>history.back();</script>')
+  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 def discover(request):
