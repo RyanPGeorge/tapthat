@@ -2,14 +2,9 @@
 {% block content %}
 
 <h1>{{ restaurant.name }}</h1>
-<h2>{{ restaurant.location }}</h2>
-<h2>Style: {{ restaurant.food_style }}</h2>
-
-<h4>Current Taps</h4>
-{% for beer in restaurant.beers_on_tap.all %}
-<p>{{ beer }}</p>
-{% endfor %}
-
+<h5>{{ restaurant.location }}</h5>
+<div class="inline2">
+<h6>Food style: {{ restaurant.food_style }}</h6>
 {% if restaurant.name in my_rests_list %}  
 <form action="{% url 'restaurant_remove' restaurant.id user.id %}" method="POST">
     <button type="submit" class="btn brown lighten-2">Untrack this Restaurant</button>
@@ -21,5 +16,53 @@
     {% csrf_token %}
 </form>
 {% endif %}
+</div>
+<hr>
+<div class="row">
+    <h4>Current Taps</h4>
+    <div class="col s12">
+        <table class="highlight">
+            <thead>
+                <tr>
+                    <th>Beer Name:</th>
+                    <th>Brewer:</th>
+                    <th>Style:</th>
+                    <th>ABV:</th>
+                    <th></th>
+                    <th>IBU:</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for beer in restaurant.beers_on_tap.all %}
+                <tr class="tooltipped" data-position="top" data-tooltip="Click Beer Name For Options">
+                    <td><a class="dropdown-trigger" data-target="dropdown1" href="#">{{beer.name}}</a></td>
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><a href="{% url 'beer_detail' beer.id %}">See beer details! </a></li>
+                        <li><a href="#!">Untap Beer :( </a></li>
+                    </ul>
+                    <td>{{beer.brewer}}</td>
+                    <td>{{beer.style}}</td>
+                    <td>{{beer.abv}}%</td>
+                    <td></td>
+                    <td>{{beer.ibu}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var tableElems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(tableElems);
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var toolElems = document.querySelectorAll('.tooltipped');
+    var instances = M.Tooltip.init(toolElems, {
+        enterDelay: 750,
+    });
+});
+</script>
 {% endblock %}
