@@ -15,7 +15,7 @@ The TapThat Team:
 Our Mission:
 =====
 
-TapThat is designed to connect Brewers, Restaurants, and Beer enthusiasts through an intuitive “check-in” system that tracks your favorite beers and where to find them.
+TapThat is designed to connect Brewers, Restaurants, and Beer enthusiasts through an intuitive “Tap It!” system that tracks your favorite beers and where to find them.
 -----
     
 <br>
