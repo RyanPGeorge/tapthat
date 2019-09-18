@@ -28,9 +28,13 @@ class Beer(models.Model):
         default = CONTAINERS[0][0]
     )
 
-
     def __str__(self):
         return self.name
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['name', 'brewer'], name='unique beer')
+        ]
 
 class LikeBeerUser(models.Model):
     beer = models.ForeignKey(Beer, on_delete=models.CASCADE)
@@ -47,6 +51,11 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['name', 'location'], name='unique restaurant')
+        ]
 
 
 class LikeRestaurantUser(models.Model):
