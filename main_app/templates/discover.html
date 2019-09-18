@@ -16,19 +16,20 @@
     <h3>All Beers</h3>
             {% for beer in beers %}
                 <a href="{% url 'beer_detail' beer.id %}">
-                    <div class="card hover">
+                    <div class="card hoverable">
                         <div class="card-content">
                             <span class="card-title">{{beer.name|capfirst}}</span>
                             <p>{{ beer.brewer|capfirst }} </p>
+                            <br>
                                 {% if beer.name in my_beers_list %}
                                     <form action="{% url 'cooler_remove' beer.id user.id %}" method="POST">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn red darken-4">Remove from My Cooler</button>
+                                        <button type="submit" class="btn-small red darken-4">Remove from My Cooler</button>
                                     </form>
                                 {% else %}
                                     <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn orange darken-4">Add to My Cooler</button>
+                                        <button type="submit" class="btn-small orange darken-4">Add to My Cooler</button>
                                     </form>
                                 {% endif %}
                           </div>
@@ -41,18 +42,18 @@
     <h3>All Restaurants</h3>
         {% for restaurant in restaurants %}
             <a href="{% url 'restaurant_detail' restaurant.id %}">
-                <div class="card hover">
+                <div class="card hoverable">
                     <div class="card-content">
                         <span class="card-title">{{ restaurant.name|capfirst }} {{restaurant.location|capfirst}}</span>
                         {% if restaurant.name in my_rests_list %}
                             <form action="{% url 'restaurant_remove' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn amber darken-4">Untrack this Restaurant</button>
+                                <button type="submit" class="btn-small amber darken-4">Remove from my restaurants</button>
                             </form>   
                         {% else %}
                             <form action="{% url 'restaurant_add' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn amber darken-4">Track this Restaurant</button>
+                                <button type="submit" class="btn-small amber darken-4">Add to my restaurants</button>
                             </form>
                         {% endif %}
                     </div>

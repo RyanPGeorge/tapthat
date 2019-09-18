@@ -7,7 +7,7 @@
 {% for r in my_rests %}
   <div class="col s12 m6 l6">
     <a href="{% url 'restaurant_detail' r.rest.id %}">
-      <div class="card hover">
+      <div class="card hoverable">
         <div class="card-content">
           <span class="card-title"><h3>{{ r.rest.name|capfirst }}</h3></span>
           {{ r.rest.location|capfirst }}

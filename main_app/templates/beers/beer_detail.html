@@ -63,9 +63,13 @@
       <li>
         <div class="collapsible-header">See where this is tapped!</div>
         <div class="collapsible-body">
-          search bar <br><br>
+
           {% for r in rests %}
-            <a href="{% url 'restaurant_detail' rs.id %}">{{ r.name }} | {{ r.location }}</a><br><br>
+            <a href="{% url 'restaurant_detail' r.id %}">
+              <h6>{{ r.name }}</h6>
+              <p>{{ r.location }}</p>
+            </a>
+            <div class="divider"></div>
           {% endfor %}
         </div>
       </li>

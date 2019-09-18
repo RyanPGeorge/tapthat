@@ -8,36 +8,69 @@
     <ul class="collection with-header">
       <li class="collection-header"><h4>Recent Beers:</h4></li>
       {% for beer in recent_beers %}
-        <li class="collection-item avatar">
+      <li class="collection-item avatar">
+        <a href="{% url 'beer_detail' beer.id %}">
           <i class="material-icons circle">whatshot</i>
           <span class="title">{{beer.name}}</span>
           <p> Brewed by: {{beer.brewer}}</p>
           <p>Style: {{beer.style}}</p>
           <p>ABV: {{beer.abv}}% | IBU: {{beer.ibu}}</p>
-        </li>
+        </a>
+      </li>
       {% endfor %}
     </ul>
   </div>
   <div class="col s12 m6 l6">
-    <ul class="collection with-header">
+    <ul class="collection with-header collapsible popout">
       <li class="collection-header"><h4>TapThat Stats:</h4></li>
-      {% for restaurant in restaurants %}
-        <li class="collection-item avatar">
-            <i class="material-icons circle">restaurant</i>
-          <span class="title">{{restaurant.name}}</span>
-          <p>{{restaurant.location}}</p>
-          <p>Style: {{restaurant.food_style}}</p>
-          <p>Beers on tap: {{restaurant.beers_on_tap.count}}</p>
-        </li>
-      {% endfor %}
-      
+      <li>
+        <div class="collapsible-header"><i class="material-icons">restaurant</i>Restaurants</div>
+        <div class="collapsible-body">
+          {% for restaurant in restaurants %}
+          <ul>
+            <a href="{% url 'restaurant_detail' restaurant.id %}">
+              <li class="collection-item avatar">
+                <i class="material-icons circle">restaurant</i>
+                <span class="title">{{restaurant.name}}</span>
+                <p>{{restaurant.location}}</p>
+                <p>Style: {{restaurant.food_style}}</p>
+                <p>Beers on tap: {{restaurant.beers_on_tap.count}}</p>
+              </li>
+              <div class="divider"></div>
+            </a>
+          </ul>
+          {% endfor %}
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">local_drink</i>Beers</div>
+        <div class="collapsible-body"><span>
+          {% for beer in beers %}
+          <ul>
+            <a href="{% url 'beer_detail' beer.id %}">
+              <li class="collection-item avatar">
+                <i class="material-icons circle">local_drink</i>
+                <span class="title">{{beer.name}}</span>
+                <p>{{beer.brewer}}</p>
+                <p>Tapped at {{beer.restaurant_set.all.count}} restaurants!</p>
+                <div class="divider"></div>
+              </li>
+            </a>
+          </ul>
+          {% endfor %}
+        </div>
+      </li>
+      <li>
+        <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+      </li>
     </ul>
   </div>
 </div>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('.collapsible');
-  var instances = M.Collapsible.init(elems, options);
+  var instances = M.Collapsible.init(elems);
 });
 </script>
 
