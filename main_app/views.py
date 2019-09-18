@@ -7,8 +7,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db.models import Q
 
+import uuid
+import boto3
+
 from .forms import SignUpForm
-from .models import Beer, LikeBeerUser, Restaurant, LikeRestaurantUser
+from .models import Beer, LikeBeerUser, Restaurant, LikeRestaurantUser, Photo
+
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'kna-catcollector'
 
 # Create your views here.
 def landing(request):
@@ -200,3 +206,17 @@ def login_request(request):
 
   form = AuthenticationForm()
   return render(request, 'registration/login.html', {'form': form})
+
+def add_photo(request, beer_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, beer_id=beer_id)
+      photo.save()
+    except:
+      messages.error(request, 'An error occurred uploading file to S3')
+  return redirect('beer_detail', beer_id=beer_id)
