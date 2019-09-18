@@ -8,7 +8,7 @@
         <div class="input-field">
             <form method="get" action="{% url 'search' %}">
                 <input type="text" name="search_query">
-                <button type="submit" class="btn-small">Search</button>
+                <button type="submit" class="btn-small brown lighten-2">Search</button>
             </form>
         </div>
     </div>
@@ -24,12 +24,12 @@
                                 {% if beer.name in my_beers_list %}
                                     <form action="{% url 'cooler_remove' beer.id user.id %}" method="POST">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn-small red darken-2">Remove from My Cooler</button>
+                                        <button type="submit" class="btn-small brown lighten-2">Remove from Cooler</button>
                                     </form>
                                 {% else %}
                                     <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn-small btn blue darken-2">Add to My Cooler</button>
+                                        <button type="submit" class="btn-small btn brown lighten-2">Add to Cooler</button>
                                     </form>
                                 {% endif %}
                           </div>
@@ -44,16 +44,18 @@
             <a href="{% url 'restaurant_detail' restaurant.id %}">
                 <div class="card hoverable">
                     <div class="card-content">
-                        <span class="card-title">{{ restaurant.name|capfirst }} {{restaurant.location|capfirst}}</span>
+                        <span class="card-title">{{ restaurant.name|capfirst }}</span>
+                        <p> {{restaurant.location|capfirst}}</p>
+                        <br>
                         {% if restaurant.name in my_rests_list %}
                             <form action="{% url 'restaurant_remove' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn-small red darken-4">Untrack this restaurant</button>
+                                <button type="submit" class="btn-small brown lighten-2">Untrack restaurant</button>
                             </form>   
                         {% else %}
                             <form action="{% url 'restaurant_add' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
-                                <button type="submit" class="btn brown lighten-2">Track this restaurant</button>
+                                <button type="submit" class="btn brown lighten-2">Track restaurant</button>
                             </form>
                         {% endif %}
                     </div>
