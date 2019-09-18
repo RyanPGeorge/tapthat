@@ -105,6 +105,7 @@ def search(request):
        'restaurants': restaurants,
        'my_beers': my_beers})
 
+@login_required
 def beer_detail(request, beer_id):
     beer = Beer.objects.get(id=beer_id)
     my_beers = LikeBeerUser.objects.filter(user=request.user)
@@ -219,6 +220,7 @@ def add_photo(request, beer_id):
       url = f"{S3_BASE_URL}{BUCKET}/{key}"
       photo = Photo(url=url, beer_id=beer_id)
       photo.save()
+      messages.success(request, 'Successfully added a photo!')
     except:
       messages.error(request, 'An error occurred uploading file to S3')
   return redirect('beer_detail', beer_id=beer_id)
