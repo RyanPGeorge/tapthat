@@ -75,7 +75,7 @@ def restaurant_remove(request, restaurant_id, user_id):
   messages.success(request, f'You are no longer tracking {rest.name} in {rest.location}')
   return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required
 def discover(request):
     beers = Beer.objects.all()
     my_beers = LikeBeerUser.objects.filter(user=request.user)
@@ -94,6 +94,7 @@ def discover(request):
        'my_rests_list': my_rests_list,
        })
 
+@login_required
 def search(request):
   beers = Beer.objects.filter(Q(name__icontains=request.GET['search_query']) | Q(brewer__icontains=request.GET['search_query']))
   restaurants = Restaurant.objects.filter(name__icontains=request.GET['search_query'])
