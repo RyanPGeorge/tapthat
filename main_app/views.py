@@ -207,6 +207,7 @@ def login_request(request):
   form = AuthenticationForm()
   return render(request, 'registration/login.html', {'form': form})
 
+@login_required
 def add_photo(request, beer_id):
   photo_file = request.FILES.get('photo-file', None)
   if photo_file:
@@ -220,3 +221,4 @@ def add_photo(request, beer_id):
     except:
       messages.error(request, 'An error occurred uploading file to S3')
   return redirect('beer_detail', beer_id=beer_id)
+
