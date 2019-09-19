@@ -28,7 +28,9 @@ def home(request):
     recent_beers_added = Beer.objects.all().order_by('-id')[0:5]
     restaurants = Restaurant.objects.all()
     beers = Beer.objects.all()
-    return render(request, 'home.html', {'recent_beers': recent_beers_added, 'restaurants': restaurants, 'beers': beers})
+    my_rests = LikeRestaurantUser.objects.filter(user=request.user)
+    my_beers = LikeBeerUser.objects.filter(user=request.user)
+    return render(request, 'home.html', {'recent_beers': recent_beers_added, 'restaurants': restaurants, 'beers': beers, 'my_rests': my_rests, 'my_beers': my_beers})
 
 @login_required
 def cooler(request):
