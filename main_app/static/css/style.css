@@ -21,6 +21,9 @@ table {
   background-color: rgba(255, 255, 255, 0.60);
 }
 
+.login {
+  text-decoration: underline;
+}
 
 .carousel .carousel-item {
   height: 350px !important;
