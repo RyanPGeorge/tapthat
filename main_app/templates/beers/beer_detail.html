@@ -59,7 +59,7 @@
     </form>
     {% else %}
     <form action="{% url 'cooler_add' beer.id user.id %}" method="POST">
-        <button type="submit" class="btn brown lighten-2">Add to My Cooler</button>
+        <button type="submit" class="btn brown">Add to My Cooler</button>
         {% csrf_token %}
     </form>
     {% endif %}
@@ -85,14 +85,14 @@
           <form action="{% url 'add_photo' beer.id %}" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
             <div class="file-field input-field">
-              <div class="btn-small">
+              <div class="btn-small brown lighten-2">
                 <span>File</span>
                 <input type="file" name="photo-file">
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text">
               </div>
-              <button class="btn-small" type="submit">Submit</button>
+              <button class="btn-small brown" type="submit">Submit</button>
             </div>
           </form>
         </div>
