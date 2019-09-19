@@ -7,7 +7,7 @@
     <form method="post" action="{% url 'login' %}">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit" class="btn orange darken-4">submit<i class="material-icons right">send</i></button>
+      <button type="submit" class="btn-small brown lighten-2">submit<i class="material-icons right">send</i></button>
       <input type="hidden" name="next" value="{{ next }}">
     </form>
     <h6>Not already a member? Then <strong><a class="login grey-text text-darken-3" href="{% url 'signup' %}">Sign Up</a></strong> instead!</h6>

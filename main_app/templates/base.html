@@ -66,7 +66,7 @@
         {% if message.tags == 'success'%}
             <script>M.toast({html: "{{message}}", classes: 'brown rounded', displayLength:2000});</script>
         {% elif message.tags == 'info'%}
-            <script>M.toast({html: "{{message}}", classes: 'orange darken-4 rounded', displayLength:2000});</script>
+            <script>M.toast({html: "{{message}}", classes: 'brown lighten-2 rounded', displayLength:2000});</script>
         {% elif message.tags == 'warning'%}
             <script>M.toast({html: "{{message}}", classes: 'orange rounded', displayLength:10000});</script>
         {% elif message.tags == 'error'%}
