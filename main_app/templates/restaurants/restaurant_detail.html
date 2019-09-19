@@ -20,8 +20,39 @@
 <hr>
 <div class="row">
     <h4>Current Taps</h4>
-    <div class="col s12">
+    <div class="col m12 l12 show-on-medium-and-up hide-on-small-only">
         <table class="highlight">
+            <thead>
+                <tr>
+                    <th>Beer Name:</th>
+                    <th>Brewer:</th>
+                    <th>Style:</th>
+                    <th>ABV:</th>
+                    <th></th>
+                    <th>IBU:</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for beer in restaurant.beers_on_tap.all %}
+                <tr class="tooltipped" data-position="top" data-tooltip="Click Beer Name For Options">
+                    <td><a class="dropdown-trigger" data-target="dropdown1" href="#">{{beer.name}}</a></td>
+                    <ul id='dropdown1' class='dropdown-content'>
+                        <li><a href="{% url 'beer_detail' beer.id %}">See beer details! </a></li>
+                        <li><a href="{% url 'untap_from_rest' beer.id restaurant.id %}">Untap Beer :( </a></li>
+                    </ul>
+                    <td>{{beer.brewer}}</td>
+                    <td>{{beer.style}}</td>
+                    <td>{{beer.abv}}%</td>
+                    <td></td>
+                    <td>{{beer.ibu}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col s12 show-on-small hide-on-med-and-up">
+        <p class="center-align">Click on beer name for options</p>
+        <table class="highlight responsive-table">
             <thead>
                 <tr>
                     <th>Beer Name:</th>
