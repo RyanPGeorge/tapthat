@@ -62,11 +62,11 @@
             </a>
         {% endfor %}
     </div>
-    <ul id="tabs-swipe-demo" class="tabs tabs2">
+    <ul id="tabs-swipe-demo" class="tabs tabs2 show-on-small hide-on-med-and-up">
         <li class="tab col s6"><a href="#swipe1">Beers</a></li>
         <li class="tab col s6"><a href="#swipe2">Restauraunts</a></li>
         </ul>
-        <div id="swipe1" class="col s12 small-tab">
+        <div id="swipe1" class="col s12 small-tab show-on-small hide-on-med-and-up">
             {% for beer in beers %}
                 <a href="{% url 'beer_detail' beer.id %}">
                     <div class="card hoverable">
@@ -90,7 +90,7 @@
                 </a>
             {% endfor %}
         </div>
-        <div id="swipe2" class="col s12 small-tab">
+        <div id="swipe2" class="col s12 small-tab show-on-small hide-on-med-and-up">
             {% for restaurant in restaurants %}
                 <a href="{% url 'restaurant_detail' restaurant.id %}">
                     <div class="card hoverable">

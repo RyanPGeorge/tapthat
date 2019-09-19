@@ -1,45 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="container center">
+<div class="center">
   <h1><img class="responsive-img" src ="https://i.imgur.com/8kY2kip.png"></h1>
 </div>
 
-<div class="container">
-  <p>TapThat is designed to connect Brewers, Restaurants, and Beer enthusiasts through an intuitive “Tap It!” system that tracks your favorite beers and where to find them.</p>  
-</div>
 
-
-<div class="container">
- <p><a href="{% url 'signup' %}"><i class="material-icons left">add_circle</i>Sign Up</a></p>
-</div>
-
-<div class="container">
- <p><a href="{% url 'login' %}"><i class="material-icons left">lock_open</i>Already a User? Login!</a></p>
-</div>
+<h5 class="center-align landing"><span>TapThat</span> is designed to connect <strong class="brown-text">Brewers, Restaurants, and Beer Enthusiasts</strong> through an intuitive <i><b>Tap It!</b></i> system that tracks your <i>favorite</i> beers and where you can find them.</h5>
+<br>
+<h6 class="center-align landing">Not a <span>TapThat</span> member yet? <a class="login grey-text text-darken-3" href="{% url 'signup' %}">Sign Up!</a></h6>
+<h6 class="center-align landing">Not a <span>TapThat</span> member yet? <a class="login grey-text text-darken-3" href="{% url 'login' %}">Login!</a></h6>
 
 <br>
 <br>
 
-<div class="container center">
-  <h5>_____________</h5>
+<div class="divider">
 </div>
 
-<div class="container">
+<div class="">
 <div class="row">
-    <div class="col s12 m6">
+    <div class="col s12 m6 l4">
       <div class="card-panel small grey lighten-2">
         <h6>"Number 1 Beer App of 2019"</h6>
         <p>- Beer Tech Review</p>
       </div>
     </div>
-    <div class="col s12 m6">
+    <div class="col s12 m6 l4">
       <div class="card-panel small grey lighten-4">
         <h6>"The Superman of Beer Apps"</h6>
         <p>- The Daily Planet</p>
       </div>
     </div>
-    <div class="col s12 m6">
+    <div class="col s12 m6 l4 offset-m3">
       <div class="card-panel small grey lighten-3">
         <h6>"WOW."</h6>
         <p>- Beer Drinkers Monthly</p>
