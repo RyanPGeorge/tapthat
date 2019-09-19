@@ -35,8 +35,8 @@
             <tbody>
                 {% for beer in restaurant.beers_on_tap.all %}
                 <tr class="tooltipped" data-position="top" data-tooltip="Click Beer Name For Options">
-                    <td><a class="dropdown-trigger" data-target="dropdown1" href="#">{{beer.name}}</a></td>
-                    <ul id='dropdown1' class='dropdown-content'>
+                    <td><a class="dropdown-trigger2" data-target="dropdown2" href="#">{{beer.name}}</a></td>
+                    <ul id='dropdown2' class='dropdown-content'>
                         <li><a href="{% url 'beer_detail' beer.id %}">See beer details! </a></li>
                         <li><a href="{% url 'untap_from_rest' beer.id restaurant.id %}">Untap Beer :( </a></li>
                     </ul>
@@ -87,6 +87,10 @@
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var tableElems = document.querySelectorAll('.dropdown-trigger');
+    var instances = M.Dropdown.init(tableElems);
+});
+document.addEventListener('DOMContentLoaded', function() {
+    var tableElems = document.querySelectorAll('.dropdown-trigger2');
     var instances = M.Dropdown.init(tableElems);
 });
 document.addEventListener('DOMContentLoaded', function() {
