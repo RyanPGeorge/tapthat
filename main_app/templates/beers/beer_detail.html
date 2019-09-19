@@ -107,6 +107,7 @@
         {% for untapped in untapped_rests %}
         <tr>
           <th>{{ untapped.name }}</th>
+          <td>{{ untapped.location }}</td>
           <td>
             <form action="{% url 'tap_to_rest' beer.id untapped.id %}">
               <button class="btn light-blue accent-2 pulse">tap at this restaurant</button>

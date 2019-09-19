@@ -26,6 +26,16 @@ h1 {
   text-align: center;
 }
 
+.landing {
+  line-height: 1.5;
+}
+
+.landing span{
+  font-family: 'Lobster', cursive;
+  font-weight: 500;
+  font-size: 1.2em;
+}
+
 .login {
   text-decoration: underline;
 }
