@@ -52,7 +52,7 @@
       </tr>
     </table>
     <br><br>
-    {% if beer.name in my_beers_list %}  
+    {% if beer.id in my_beers_list %}  
     <form action="{% url 'cooler_remove' beer.id user.id %}" method="POST">
         <button type="submit" class="btn brown lighten-2">Remove from My Cooler</button>
         {% csrf_token %}
@@ -110,7 +110,7 @@
           <td>{{ untapped.location }}</td>
           <td>
             <form action="{% url 'tap_to_rest' beer.id untapped.id %}">
-              <button class="btn cyan pulse">tap at this restaurant</button>
+              <button class="btn light-blue accent-2 pulse">tap at this restaurant</button>
             </form>
           </td>
         </tr>
