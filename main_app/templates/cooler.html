@@ -9,8 +9,16 @@
     <a href="{% url 'beer_detail' b.beer.id %}">
       <div class="card hoverable">
         <div class="card-content">
-          <span class="card-title"><h3>{{ b.beer|capfirst }}</h3></span>
-          {{ b.beer.brewer|capfirst }}
+          {% if b.beer.container_type == 'B' %}
+          <p class="card-title grey-text text-darken-3 center-align"><i class="material-icons medium">battery_std</i></p>
+          {% elif b.beer.container_type == 'C' %}
+          <p class="card-title grey-text text-darken-3 center-align"><i class="material-icons medium">class</i></p>
+          {% else %}
+          <p class="card-title grey-text text-darken-3 center-align"><i class="material-icons medium">local_drink</i></p>
+          {% endif %}
+          <div class="divider"></div>
+          <span class="grey-text text-darken-3 center-align"><h3>{{ b.beer|capfirst }}</h3></span>
+          <p class="grey-text text-darken-3 center-align">{{ b.beer.brewer|capfirst }}</p>
         </div>
       </div>
     </a>

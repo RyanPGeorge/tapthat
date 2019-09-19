@@ -9,8 +9,10 @@
     <a href="{% url 'restaurant_detail' r.rest.id %}">
       <div class="card hoverable">
         <div class="card-content">
-          <span class="card-title"><h3>{{ r.rest.name|capfirst }}</h3></span>
-          {{ r.rest.location|capfirst }}
+          <p class="card-title  grey-text text-darken-3 center-align"><i class="material-icons medium">restaurant_menu</i></p>
+          <div class="divider"></div>
+          <span class="card-title grey-text text-darken-3 center-align"><h3>{{ r.rest.name|capfirst }}</h3></span>
+          <p class="grey-text text-darken-3 center-align">{{ r.rest.location|capfirst }}</p>
         </div>
       </div>
     </a>

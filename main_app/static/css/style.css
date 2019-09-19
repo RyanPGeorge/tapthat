@@ -21,6 +21,11 @@ table {
   background-color: rgba(255, 255, 255, 0.60);
 }
 
+h1 {
+  font-family: 'Lobster', cursive;
+  text-align: center;
+}
+
 .login {
   text-decoration: underline;
 }
