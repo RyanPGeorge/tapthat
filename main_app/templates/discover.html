@@ -21,7 +21,7 @@
                         <span class="card-title">{{beer.name|capfirst}}</span>
                         <p>{{ beer.brewer|capfirst }} </p>
                         <br>
-                            {% if beer.name in my_beers_list %}
+                            {% if beer.id in my_beers_list %}
                                 <form action="{% url 'cooler_remove' beer.id user.id %}" method="POST">
                                     {% csrf_token %}
                                     <button type="submit" class="btn-small brown lighten-2">Remove from Cooler</button>
@@ -46,7 +46,7 @@
                         <span class="card-title">{{ restaurant.name|capfirst }}</span>
                         <p> {{restaurant.location|capfirst}}</p>
                         <br>
-                        {% if restaurant.name in my_rests_list %}
+                        {% if restaurant.id in my_rests_list %}
                             <form action="{% url 'restaurant_remove' restaurant.id user.id %}" method="POST">
                                 {% csrf_token %}
                                 <button type="submit" class="btn-small brown lighten-2">Untrack restaurant</button>

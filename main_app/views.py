@@ -84,9 +84,9 @@ def discover(request):
     my_rests = LikeRestaurantUser.objects.filter(user=request.user)
     my_rests_list = []
     for b in my_beers:
-      my_beers_list.append(b.beer.name)
+      my_beers_list.append(b.beer.id)
     for r in my_rests:
-      my_rests_list.append(r.rest.name)
+      my_rests_list.append(r.rest.id)
     return render(request, 'discover.html', {
        'beers': beers,
        'my_beers_list': my_beers_list,
@@ -111,7 +111,7 @@ def beer_detail(request, beer_id):
     my_beers = LikeBeerUser.objects.filter(user=request.user)
     my_beers_list = []
     for b in my_beers:
-      my_beers_list.append(b.beer.name)
+      my_beers_list.append(b.beer.id)
     rests = Restaurant.objects.filter(beers_on_tap=beer_id)
     untapped_rests = Restaurant.objects.exclude(beers_on_tap=beer_id)
     return render(request, 'beers/beer_detail.html',
@@ -132,7 +132,7 @@ def tap_to_rest(request, beer_id, restaurant_id):
   untapped_rests = Restaurant.objects.exclude(beers_on_tap=beer_id)
   my_beers_list = []
   for b in my_beers:
-    my_beers_list.append(b.beer.name)
+    my_beers_list.append(b.beer.id)
   return render(request, 'beers/beer_detail.html',
   {
         'beer': beer,
@@ -144,11 +144,11 @@ def tap_to_rest(request, beer_id, restaurant_id):
 @login_required
 def untap_from_rest(request, beer_id, restaurant_id):
   restaurant = Restaurant.objects.get(id=restaurant_id)
-  restaurant.beers_on_tap.filter(id=beer_id).delete()
+  Restaurant.objects.get(id=restaurant_id).beers_on_tap.remove(beer_id)
   my_rests = LikeRestaurantUser.objects.filter(user=request.user)
   my_rests_list = []
   for r in my_rests:
-    my_rests_list.append(r.rest.name)
+    my_rests_list.append(r.rest.id)
   return render(request, 'restaurants/restaurant_detail.html',
   {
     'restaurant': restaurant,
@@ -160,7 +160,7 @@ def restaurant_detail(request, restaurant_id):
   my_rests = LikeRestaurantUser.objects.filter(user=request.user)
   my_rests_list = []
   for r in my_rests:
-    my_rests_list.append(r.rest.name)
+    my_rests_list.append(r.rest.id)
   return render(request, 'restaurants/restaurant_detail.html',
   {
       'restaurant': restaurant,

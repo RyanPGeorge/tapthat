@@ -59,11 +59,10 @@ TapThat 1.1
 
 Technologies Used:
 -----
-* Python
+* Python3
 * PostgreSQL
 * Django
 * Javascript
-* BreweryDB API
 * HTML
 * Materialize CSS
 * Heroku
